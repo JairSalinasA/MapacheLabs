@@ -3,24 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Servicios Tecnológicos | Innovación Digital</title>
+    <title>Servicios Tecnológicos | Rakūn Labs</title>
     <!-- Preload para mejorar rendimiento -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦝</text></svg>">
     <style>
-        /* Variables CSS simplificadas */
+        /* Variables CSS - Tema macOS */
         :root {
-            --bg: #ffffff;
-            --bg-secondary: #f5f5f7;
-            --text-primary: #1d1d1f;
-            --text-secondary: #86868b;
-            --accent: #0071e3;
-            --accent-light: #2997ff;
-            --border: #d2d2d7;
-            --card-bg: #ffffff;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.12);
-            --navbar-height: 60px;
+            --mac-bg: #ffffff;
+            --mac-bg-secondary: #f5f5f7;
+            --mac-text-primary: #1d1d1f;
+            --mac-text-secondary: #86868b;
+            --mac-accent: #0071e3;
+            --mac-accent-light: #2997ff;
+            --mac-border: #d2d2d7;
+            --mac-card-bg: rgba(255, 255, 255, 0.8);
+            --mac-glass: rgba(255, 255, 255, 0.8);
+            --mac-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --mac-shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.15);
+            --mac-navbar-height: 60px;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         /* Reset y estilos base */
@@ -32,17 +35,90 @@
 
         html {
             scroll-behavior: smooth;
-            scroll-padding-top: var(--navbar-height);
+            scroll-padding-top: var(--mac-navbar-height);
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background-color: var(--bg);
-            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+            background-color: var(--mac-bg);
+            color: var(--mac-text-primary);
             line-height: 1.6;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Skip link para accesibilidad */
+        .skip-link {
+            position: absolute;
+            left: -9999px;
+            z-index: 999;
+        }
+
+        .skip-link:focus {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: var(--mac-accent);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+
+        /* Preloader estilo macOS */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--mac-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .progress-indicator {
+            width: 80px;
+            height: 4px;
+            background-color: rgba(0, 113, 227, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background-color: var(--mac-accent);
+            border-radius: 2px;
+            animation: loading-progress 2s ease-in-out infinite;
+        }
+
+        @keyframes loading-progress {
+            0% { width: 0%; }
+            50% { width: 80%; }
+            100% { width: 100%; }
+        }
+
+        .status-text {
+            color: var(--mac-text-secondary);
+            font-size: 14px;
+            font-weight: 400;
         }
 
         /* Utilidades */
@@ -60,22 +136,59 @@
             justify-content: center;
         }
 
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--mac-accent);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 113, 227, 0.25);
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            background: var(--mac-accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 113, 227, 0.35);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--mac-accent);
+            color: var(--mac-accent);
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background: var(--mac-accent);
+            color: white;
+        }
+
         /* Header - Estilos actualizados */
         header {
-            background: var(--bg);
-            border-bottom: 1px solid var(--border);
+            background: var(--mac-glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--mac-border);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            height: var(--navbar-height);
+            height: var(--mac-navbar-height);
         }
 
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: var(--navbar-height);
+            height: var(--mac-navbar-height);
         }
 
         .logo {
@@ -84,25 +197,26 @@
             text-decoration: none;
             font-weight: 600;
             font-size: 1.2rem;
-            color: var(--text-primary);
+            color: var(--mac-text-primary);
         }
 
         .logo-icon {
+            width: 200px;
+            height: auto;
             margin-right: 8px;
-            font-size: 1.5rem;
-            color: var(--accent);
+            vertical-align: middle;
+            padding-top: 9px;
         }
 
         .nav-menu {
             display: flex;
             list-style: none;
             gap: 25px;
-            margin-left: auto; /* Alinea el menú a la derecha */
         }
 
         .nav-link {
             text-decoration: none;
-            color: var(--text-primary);
+            color: var(--mac-text-primary);
             font-weight: 400;
             transition: color 0.2s ease;
             padding: 8px 0;
@@ -117,12 +231,12 @@
             height: 2px;
             bottom: 0;
             left: 0;
-            background: var(--accent);
+            background: var(--mac-accent);
             transition: width 0.2s ease;
         }
 
         .nav-link:hover {
-            color: var(--accent);
+            color: var(--mac-accent);
         }
 
         .nav-link:hover::after {
@@ -145,14 +259,14 @@
             display: block;
             height: 2px;
             width: 100%;
-            background-color: var(--text-primary);
+            background-color: var(--mac-text-primary);
             transition: all 0.3s ease;
         }
 
         /* Hero Section */
         .hero {
-            padding-top: calc(var(--navbar-height) + 40px);
-            background: linear-gradient(135deg, var(--bg) 0%, var(--bg-secondary) 100%);
+            padding-top: calc(var(--mac-navbar-height) + 40px);
+            background: linear-gradient(135deg, var(--mac-bg) 0%, var(--mac-bg-secondary) 100%);
             text-align: center;
             min-height: 100vh;
             display: flex;
@@ -170,20 +284,20 @@
             margin-bottom: 20px;
             line-height: 1.2;
             font-weight: 600;
-            color: var(--text-primary);
+            color: var(--mac-text-primary);
         }
 
         .hero p {
             font-size: clamp(1rem, 3vw, 1.2rem);
             margin-bottom: 40px;
-            color: var(--text-secondary);
+            color: var(--mac-text-secondary);
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
         }
 
         .scroll-indicator {
-            color: var(--text-secondary);
+            color: var(--mac-text-secondary);
             font-size: 0.9rem;
             display: flex;
             flex-direction: column;
@@ -215,12 +329,12 @@
         .category-title {
             font-size: clamp(1.8rem, 4vw, 2.5rem);
             font-weight: 600;
-            color: var(--text-primary);
+            color: var(--mac-text-primary);
             margin-bottom: 10px;
         }
 
         .category-subtitle {
-            color: var(--text-secondary);
+            color: var(--mac-text-secondary);
             font-size: clamp(1rem, 2.5vw, 1.1rem);
         }
 
@@ -234,13 +348,15 @@
         }
 
         .service-card {
-            background: var(--card-bg);
+            background: var(--mac-card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-radius: 12px;
             padding: 25px;
-            border: 1px solid var(--border);
+            border: 1px solid var(--mac-border);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             text-align: center;
-            box-shadow: var(--shadow);
+            box-shadow: var(--mac-shadow);
             opacity: 0;
             transform: translateY(20px);
         }
@@ -252,15 +368,15 @@
 
         .service-card:hover {
             transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
-            border-color: var(--accent);
+            box-shadow: var(--mac-shadow-hover);
+            border-color: var(--mac-accent);
         }
 
         .service-icon {
             width: 60px;
             height: 60px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            background: linear-gradient(135deg, var(--mac-accent), var(--mac-accent-light));
             display: flex;
             align-items: center;
             justify-content: center;
@@ -278,17 +394,17 @@
             font-size: 1.3rem;
             font-weight: 600;
             margin-bottom: 12px;
-            color: var(--text-primary);
+            color: var(--mac-text-primary);
         }
 
         .service-description {
-            color: var(--text-secondary);
+            color: var(--mac-text-secondary);
             margin-bottom: 12px;
             line-height: 1.5;
         }
 
         .service-benefit {
-            color: var(--accent);
+            color: var(--mac-accent);
             font-weight: 500;
             margin-bottom: 15px;
             font-size: 0.95rem;
@@ -311,7 +427,7 @@
             left: 0;
             width: 100%;
             height: 2px;
-            background: linear-gradient(90deg, #10b981, var(--accent));
+            background: linear-gradient(90deg, #10b981, var(--mac-accent));
             border-radius: 1px;
         }
 
@@ -321,7 +437,7 @@
         }
 
         .premium-card .service-title {
-            color: var(--accent);
+            color: var(--mac-accent);
         }
 
         /* Navigation Dots */
@@ -346,8 +462,235 @@
         }
 
         .nav-dot:hover, .nav-dot.active {
-            background: var(--accent);
+            background: var(--mac-accent);
             transform: scale(1.5);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--mac-bg) 0%, var(--mac-bg-secondary) 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-content h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: var(--mac-text-primary);
+        }
+
+        .cta-content p {
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            margin-bottom: 40px;
+            color: var(--mac-text-secondary);
+        }
+
+        /* Modal estilo macOS */
+        .whatsapp-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 10000;
+            animation: modal-fade-in 0.3s ease;
+        }
+
+        @keyframes modal-fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: var(--mac-bg);
+            margin: 5vh auto;
+            padding: 40px;
+            border-radius: 20px;
+            width: min(90%, 500px);
+            text-align: center;
+            position: relative;
+            box-shadow: var(--mac-shadow-hover);
+            animation: modal-slide-in 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--mac-border);
+        }
+
+        @keyframes modal-slide-in {
+            from { 
+                transform: translateY(-50px) scale(0.95); 
+                opacity: 0; 
+            }
+            to { 
+                transform: translateY(0) scale(1); 
+                opacity: 1; 
+            }
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: 300;
+            color: var(--mac-text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .close:hover {
+            color: var(--mac-text-primary);
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .whatsapp-icon {
+            font-size: 4rem;
+            color: #25d366;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            color: var(--mac-text-primary);
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .modal-header p {
+            color: var(--mac-text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .qr-container {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 25px auto;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 1px solid var(--mac-border);
+        }
+
+        .qr-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .chat-directo {
+            background: #25d366;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+        }
+
+        .chat-directo:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+            background: #128C7E;
+        }
+
+        .modal-footer {
+            color: var(--mac-text-secondary);
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+
+        /* Footer estilo macOS */
+        footer {
+            background: var(--mac-bg-secondary);
+            border-top: 1px solid var(--mac-border);
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            color: var(--mac-text-primary);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--mac-text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 15px;
+        }
+
+        .footer-links a:hover {
+            color: var(--mac-accent);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: var(--mac-bg);
+            border: 1px solid var(--mac-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--mac-text-primary);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--mac-accent);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 113, 227, 0.2);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--mac-border);
+            color: var(--mac-text-secondary);
+            font-size: 0.9rem;
         }
 
         /* Media Queries */
@@ -365,19 +708,26 @@
             .nav-menu {
                 position: fixed;
                 left: -100%;
-                top: var(--navbar-height);
+                top: var(--mac-navbar-height);
                 flex-direction: column;
-                background: var(--bg);
+                background: var(--mac-glass);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
                 width: 100%;
                 padding: 20px;
                 gap: 15px;
-                border-top: 1px solid var(--border);
+                border-top: 1px solid var(--mac-border);
                 transition: left 0.3s ease;
                 box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
             }
 
             .nav-menu.active {
                 left: 0;
+            }
+
+            .nav-item {
+                margin: 15px 0;
+                text-align: center;
             }
 
             .hamburger.active span:nth-child(1) {
@@ -410,17 +760,22 @@
                 padding: 20px;
             }
         }
-
-        .logo img.logo-icon {
-    padding-top: 26px;
-    display: block;
-    height: 109px;
-    width: auto;
-    object-fit: contain;
-}
     </style>
 </head>
 <body>
+    <!-- Skip link para accesibilidad -->
+    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+    <!-- Preloader -->
+    <div id="preloader" class="preloader" role="status" aria-label="Cargando página">
+        <div class="loader-container">
+            <div class="progress-indicator">
+                <div class="progress-bar"></div>
+            </div>
+            <div class="status-text">Cargando Rakūn Labs</div>
+        </div>
+    </div>
+
     <!-- Header -->
     <header role="banner">
         <div class="container">
@@ -472,231 +827,390 @@
         <div class="nav-dot" data-section="packages"></div>
     </div>
 
-    <section id="hero" class="hero section">
-        <div class="hero-content">
-            <h1>Transformamos tu negocio con tecnología</h1>
-            <p>Soluciones digitales personalizadas para llevar tu empresa al siguiente nivel</p>
-        </div>
-        <div class="scroll-indicator">
-            <span>Explora nuestros servicios</span>
-            <i class="fas fa-chevron-down"></i>
-        </div>
-    </section>
+    <!-- Main Content -->
+    <main id="main-content">
+        <section id="hero" class="hero section">
+            <div class="hero-content">
+                <h1>Transformamos tu negocio con tecnología</h1>
+                <p>Soluciones digitales personalizadas para llevar tu empresa al siguiente nivel</p>
+            </div>
+            <div class="scroll-indicator">
+                <span>Explora nuestros servicios</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </section>
 
-    <section id="web-mobile" class="section">
-        <div class="category-header">
-            <h2 class="category-title">Desarrollo Web & Móvil</h2>
-            <p class="category-subtitle">Aplicaciones modernas que impulsan tu presencia digital</p>
-        </div>
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-icon"><i class="fas fa-bolt"></i></div>
-                <h3 class="service-title">App Express</h3>
-                <p class="service-description">Desarrollo rápido de aplicaciones web a medida.</p>
-                <p class="service-benefit">Tu negocio en línea en poco tiempo.</p>
-                <div class="service-price">
-                    <span class="price-highlight">$500 - $2,000 USD</span>
+        <section id="web-mobile" class="section">
+            <div class="category-header">
+                <h2 class="category-title">Desarrollo Web & Móvil</h2>
+                <p class="category-subtitle">Aplicaciones modernas que impulsan tu presencia digital</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-bolt"></i></div>
+                    <h3 class="service-title">App Express</h3>
+                    <p class="service-description">Desarrollo rápido de aplicaciones web a medida.</p>
+                    <p class="service-benefit">Tu negocio en línea en poco tiempo.</p>
+                    <div class="service-price">
+                        <span class="price-highlight">$500 - $2,000 USD</span>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <h3 class="service-title">Móvil Fácil</h3>
+                    <p class="service-description">App móvil para iOS y Android.</p>
+                    <p class="service-benefit">Llega directo a tus clientes.</p>
+                    <div class="service-price">
+                        <span class="price-highlight">$800 - $3,000 USD</span>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-sync-alt"></i></div>
+                    <h3 class="service-title">Migración Smart</h3>
+                    <p class="service-description">Modernización de sistemas antiguos.</p>
+                    <p class="service-benefit">Tecnología actual sin perder datos.</p>
+                    <div class="service-price">
+                        <span class="price-highlight">$600 - $2,500 USD</span>
+                    </div>
                 </div>
             </div>
-            <div class="service-card">
-                <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
-                <h3 class="service-title">Móvil Fácil</h3>
-                <p class="service-description">App móvil para iOS y Android.</p>
-                <p class="service-benefit">Llega directo a tus clientes.</p>
-                <div class="service-price">
-                    <span class="price-highlight">$800 - $3,000 USD</span>
-                </div>
-            </div>
-            <div class="service-card">
-                <div class="service-icon"><i class="fas fa-sync-alt"></i></div>
-                <h3 class="service-title">Migración Smart</h3>
-                <p class="service-description">Modernización de sistemas antiguos.</p>
-                <p class="service-benefit">Tecnología actual sin perder datos.</p>
-                <div class="service-price">
-                    <span class="price-highlight">$600 - $2,500 USD</span>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="automation" class="section">
-        <div class="category-header">
-            <h2 class="category-title">Automatización & Productividad</h2>
-            <p class="category-subtitle">Optimiza procesos y ahorra tiempo valioso</p>
-        </div>
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-icon"><i class="fas fa-bolt"></i></div>
-                <h3 class="service-title">Automatiza Tu Empresa</h3>
-                <p class="service-description">Scripts y RPA para tareas repetitivas.</p>
-                <p class="service-benefit">Ahorra tiempo y reduce errores.</p>
-                <div class="service-price">
-                    <span class="price-highlight">$300 - $1,500 USD</span>
+        <section id="automation" class="section">
+            <div class="category-header">
+                <h2 class="category-title">Automatización & Productividad</h2>
+                <p class="category-subtitle">Optimiza procesos y ahorra tiempo valioso</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-bolt"></i></div>
+                    <h3 class="service-title">Automatiza Tu Empresa</h3>
+                    <p class="service-description">Scripts y RPA para tareas repetitivas.</p>
+                    <p class="service-benefit">Ahorra tiempo y reduce errores.</p>
+                    <div class="service-price">
+                        <span class="price-highlight">$300 - $1,500 USD</span>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-chart-bar"></i></div>
+                    <h3 class="service-title">Excel Avanzado</h3>
+                    <p class="service-description">Dashboards y macros profesionales.</p>
+                    <p class="service-benefit">Decisiones rápidas con datos claros.</p>
+                    <div class="service-price">
+                        <span class="price-highlight">$200 - $800 USD</span>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-robot"></i></div>
+                    <h3 class="service-title">Bot Inteligente</h3>
+                    <p class="service-description">Chatbots y asistentes internos.</p>
+                    <p class="service-benefit">Atención 24/7 sin costos extra.</p>
+                    <div class="service-price">
+                        <span class="price-highlight">$400 - $1,500 USD</span>
+                    </div>
                 </div>
             </div>
-            <div class="service-card">
-                <div class="service-icon"><i class="fas fa-chart-bar"></i></div>
-                <h3 class="service-title">Excel Avanzado</h3>
-                <p class="service-description">Dashboards y macros profesionales.</p>
-                <p class="service-benefit">Decisiones rápidas con datos claros.</p>
-                <div class="service-price">
-                    <span class="price-highlight">$200 - $800 USD</span>
-                </div>
-            </div>
-            <div class="service-card">
-                <div class="service-icon"><i class="fas fa-robot"></i></div>
-                <h3 class="service-title">Bot Inteligente</h3>
-                <p class="service-description">Chatbots y asistentes internos.</p>
-                <p class="service-benefit">Atención 24/7 sin costos extra.</p>
-                <div class="service-price">
-                    <span class="price-highlight">$400 - $1,500 USD</span>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="data" class="section">
-        <div class="category-header">
-            <h2 class="category-title">Datos & Reportes</h2>
-            <p class="category-subtitle">Convierte información en decisiones inteligentes</p>
-        </div>
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-icon"><i class="fas fa-database"></i></div>
-                <h3 class="service-title">Base Segura</h3>
-                <p class="service-description">Diseño y optimización de bases de datos.</p>
-                <p class="service-benefit">Datos protegidos y accesibles.</p>
-                <div class="service-price">
-                    <span class="price-highlight">$400 - $1,200 USD</span>
+        <section id="data" class="section">
+            <div class="category-header">
+                <h2 class="category-title">Datos & Reportes</h2>
+                <p class="category-subtitle">Convierte información en decisiones inteligentes</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-database"></i></div>
+                    <h3 class="service-title">Base Segura</h3>
+                    <p class="service-description">Diseño y optimización de bases de datos.</p>
+                    <p class="service-benefit">Datos protegidos y accesibles.</p>
+                    <div class="service-price">
+                        <span class="price-highlight">$400 - $1,200 USD</span>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-link"></i></div>
+                    <h3 class="service-title">Data Pipeline</h3>
+                    <p class="service-description">Integración automática de sistemas y datos.</p>
+                    <p class="service-benefit">Flujo de información sin interrupciones.</p>
+                    <div class="service-price">
+                        <span class="price-highlight">$500 - $1,800 USD</span>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3 class="service-title">DashBoard Pro</h3>
+                    <p class="service-description">Reportes visuales e interactivos.</p>
+                    <p class="service-benefit">Información en tiempo real.</p>
+                    <div class="service-price">
+                        <span class="price-highlight">$300 - $1,200 USD</span>
+                    </div>
                 </div>
             </div>
-            <div class="service-card">
-                <div class="service-icon"><i class="fas fa-link"></i></div>
-                <h3 class="service-title">Data Pipeline</h3>
-                <p class="service-description">Integración automática de sistemas y datos.</p>
-                <p class="service-benefit">Flujo de información sin interrupciones.</p>
-                <div class="service-price">
-                    <span class="price-highlight">$500 - $1,800 USD</span>
-                </div>
-            </div>
-            <div class="service-card">
-                <div class="service-icon"><i class="fas fa-chart-line"></i></div>
-                <h3 class="service-title">DashBoard Pro</h3>
-                <p class="service-description">Reportes visuales e interactivos.</p>
-                <p class="service-benefit">Información en tiempo real.</p>
-                <div class="service-price">
-                    <span class="price-highlight">$300 - $1,200 USD</span>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="ai" class="section">
-        <div class="category-header">
-            <h2 class="category-title">Inteligencia Artificial</h2>
-            <p class="category-subtitle">Tecnología avanzada para ventajas competitivas</p>
-        </div>
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-icon"><i class="fas fa-crystal-ball"></i></div>
-                <h3 class="service-title">Predicción Inteligente</h3>
-                <p class="service-description">Modelos predictivos (ventas, inventario, clientes).</p>
-                <p class="service-benefit">Anticípate al mercado.</p>
-                <div class="service-price">
-                    <span class="price-highlight">$700 - $2,500 USD</span>
+        <section id="ai" class="section">
+            <div class="category-header">
+                <h2 class="category-title">Inteligencia Artificial</h2>
+                <p class="category-subtitle">Tecnología avanzada para ventajas competitivas</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-crystal-ball"></i></div>
+                    <h3 class="service-title">Predicción Inteligente</h3>
+                    <p class="service-description">Modelos predictivos (ventas, inventario, clientes).</p>
+                    <p class="service-benefit">Anticípate al mercado.</p>
+                    <div class="service-price">
+                        <span class="price-highlight">$700 - $2,500 USD</span>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-search"></i></div>
+                    <h3 class="service-title">Detección AI</h3>
+                    <p class="service-description">Identificación de textos/imágenes generados por IA.</p>
+                    <p class="service-benefit">Confiabilidad en tus contenidos.</p>
+                    <div class="service-price">
+                        <span class="price-highlight">$200 - $900 USD</span>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-gem"></i></div>
+                    <h3 class="service-title">Analiza Tu Data</h3>
+                    <p class="service-description">Minería de datos y análisis de tendencias.</p>
+                    <p class="service-benefit">Encuentra oportunidades ocultas.</p>
+                    <div class="service-price">
+                        <span class="price-highlight">$500 - $2,000 USD</span>
+                    </div>
                 </div>
             </div>
-            <div class="service-card">
-                <div class="service-icon"><i class="fas fa-search"></i></div>
-                <h3 class="service-title">Detección AI</h3>
-                <p class="service-description">Identificación de textos/imágenes generados por IA.</p>
-                <p class="service-benefit">Confiabilidad en tus contenidos.</p>
-                <div class="service-price">
-                    <span class="price-highlight">$200 - $900 USD</span>
-                </div>
-            </div>
-            <div class="service-card">
-                <div class="service-icon"><i class="fas fa-gem"></i></div>
-                <h3 class="service-title">Analiza Tu Data</h3>
-                <p class="service-description">Minería de datos y análisis de tendencias.</p>
-                <p class="service-benefit">Encuentra oportunidades ocultas.</p>
-                <div class="service-price">
-                    <span class="price-highlight">$500 - $2,000 USD</span>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="security" class="section">
-        <div class="category-header">
-            <h2 class="category-title">Seguridad & Protección</h2>
-            <p class="category-subtitle">Protege tu información y sistemas críticos</p>
-        </div>
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
-                <h3 class="service-title">Código Seguro</h3>
-                <p class="service-description">Auditoría de seguridad de aplicaciones.</p>
-                <p class="service-benefit">Protege tu negocio de ataques.</p>
-                <div class="service-price">
-                    <span class="price-highlight">$400 - $1,200 USD</span>
+        <section id="security" class="section">
+            <div class="category-header">
+                <h2 class="category-title">Seguridad & Protección</h2>
+                <p class="category-subtitle">Protege tu información y sistemas críticos</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3 class="service-title">Código Seguro</h3>
+                    <p class="service-description">Auditoría de seguridad de aplicaciones.</p>
+                    <p class="service-benefit">Protege tu negocio de ataques.</p>
+                    <div class="service-price">
+                        <span class="price-highlight">$400 - $1,200 USD</span>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-lock"></i></div>
+                    <h3 class="service-title">Protege Tus Datos</h3>
+                    <p class="service-description">Implementación de encriptación y autenticación.</p>
+                    <p class="service-benefit">Seguridad para tu información crítica.</p>
+                    <div class="service-price">
+                        <span class="price-highlight">$500 - $1,500 USD</span>
+                    </div>
                 </div>
             </div>
-            <div class="service-card">
-                <div class="service-icon"><i class="fas fa-lock"></i></div>
-                <h3 class="service-title">Protege Tus Datos</h3>
-                <p class="service-description">Implementación de encriptación y autenticación.</p>
-                <p class="service-benefit">Seguridad para tu información crítica.</p>
-                <div class="service-price">
-                    <span class="price-highlight">$500 - $1,500 USD</span>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="packages" class="section">
-        <div class="category-header">
-            <h2 class="category-title">Paquetes Integrales</h2>
-            <p class="category-subtitle">Soluciones completas para transformar tu empresa</p>
+        <section id="packages" class="section">
+            <div class="category-header">
+                <h2 class="category-title">Paquetes Integrales</h2>
+                <p class="category-subtitle">Soluciones completas para transformar tu empresa</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card premium-card">
+                    <div class="service-icon"><i class="fas fa-briefcase"></i></div>
+                    <h3 class="service-title">Productividad Total</h3>
+                    <p class="service-description">Automatización + Reportes + Dashboard.</p>
+                    <p class="service-benefit">Optimización integral de procesos.</p>
+                    <div class="service-price">
+                        <span class="price-highlight">$800 - $2,500 USD</span>
+                    </div>
+                </div>
+                <div class="service-card premium-card">
+                    <div class="service-icon"><i class="fas fa-star"></i></div>
+                    <h3 class="service-title">Transformación Digital</h3>
+                    <p class="service-description">Modernización + App + Capacitación.</p>
+                    <p class="service-benefit">Tu empresa lista para el futuro.</p>
+                    <div class="service-price">
+                        <span class="price-highlight">$1,500 - $5,000 USD</span>
+                    </div>
+                </div>
+                <div class="service-card premium-card">
+                    <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3 class="service-title">Seguridad y Control</h3>
+                    <p class="service-description">Auditoría + Seguridad de datos + Monitoreo.</p>
+                    <p class="service-benefit">Cero riesgos para tu negocio.</p>
+                    <div class="service-price">
+                        <span class="price-highlight">$800 - $2,500 USD</span>
+                    </div>
+                </div>
+            </div>  
+        </section>
+
+        <!-- CTA Section -->
+        <section class="section cta-section" id="contacto">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>¿Listo para transformar tu negocio?</h2>
+                    <p>Contáctanos hoy mismo y descubre cómo nuestras soluciones pueden impulsar tu crecimiento digital.</p>
+                    <button id="whatsapp-btn" class="btn">
+                        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                        Contactar por WhatsApp
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- WhatsApp Modal -->
+    <div id="whatsapp-modal" class="whatsapp-modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+        <div class="modal-content">
+            <span class="close" aria-label="Cerrar modal">&times;</span>
+            <div class="whatsapp-icon">
+                <i class="fab fa-whatsapp" aria-hidden="true"></i>
+            </div>
+            <div class="modal-header">
+                <h2 id="modal-title">Contacta a Rakūn Labs</h2>
+                <p>Escanea el código QR o haz clic en el enlace para chatear directamente por WhatsApp</p>
+            </div>
+            <div class="qr-container">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://wa.me/1234567890?text=Hola%20Rakūn%20Labs,%20me%20interesan%20sus%20servicios" alt="Código QR para contactar por WhatsApp" class="qr-image">
+            </div>
+            <a href="https://wa.me/1234567890?text=Hola%20Rakūn%20Labs,%20me%20interesan%20sus%20servicios" class="chat-directo" target="_blank" rel="noopener">
+                <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                Iniciar chat directo
+            </a>
+            <p class="modal-footer">Horario de atención: Lunes a Viernes, 9:00 AM - 6:00 PM</p>
         </div>
-        <div class="services-grid">
-            <div class="service-card premium-card">
-                <div class="service-icon"><i class="fas fa-briefcase"></i></div>
-                <h3 class="service-title">Productividad Total</h3>
-                <p class="service-description">Automatización + Reportes + Dashboard.</p>
-                <p class="service-benefit">Optimización integral de procesos.</p>
-                <div class="service-price">
-                    <span class="price-highlight">$800 - $2,500 USD</span>
+    </div>
+
+    <!-- Footer -->
+    <footer role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Rakūn Labs</h3>
+                    <p>Transformando ideas en soluciones digitales desde 2020.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Servicios</h3>
+                    <ul class="footer-links">
+                        <li><a href="#web-mobile">Desarrollo Web & Móvil</a></li>
+                        <li><a href="#automation">Automatización</a></li>
+                        <li><a href="#data">Datos & Reportes</a></li>
+                        <li><a href="#ai">Inteligencia Artificial</a></li>
+                        <li><a href="#security">Seguridad</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Recursos</h3>
+                    <ul class="footer-links">
+                        <li><a href="/index.html#blog">Blog Técnico</a></li>
+                        <li><a href="#">Documentación</a></li>
+                        <li><a href="#">Tutoriales</a></li>
+                        <li><a href="#">Casos de Estudio</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:info@rakunlabs.com">info@rakunlabs.com</a></li>
+                        <li><a href="tel:+1234567890">+1 (234) 567-890</a></li>
+                        <li><a href="#">Soporte Técnico</a></li>
+                        <li><a href="#contacto">Consultoría</a></li>
+                    </ul>
                 </div>
             </div>
-            <div class="service-card premium-card">
-                <div class="service-icon"><i class="fas fa-star"></i></div>
-                <h3 class="service-title">Transformación Digital</h3>
-                <p class="service-description">Modernización + App + Capacitación.</p>
-                <p class="service-benefit">Tu empresa lista para el futuro.</p>
-                <div class="service-price">
-                    <span class="price-highlight">$1,500 - $5,000 USD</span>
-                </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Rakūn Labs. Todos los derechos reservados.</p>
             </div>
-            <div class="service-card premium-card">
-                <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
-                <h3 class="service-title">Seguridad y Control</h3>
-                <p class="service-description">Auditoría + Seguridad de datos + Monitoreo.</p>
-                <p class="service-benefit">Cero riesgos para tu negocio.</p>
-                <div class="service-price">
-                    <span class="price-highlight">$800 - $2,500 USD</span>
-                </div>
-            </div>
-        </div>  
-    </section>
+        </div>
+    </footer>
 
     <script>
-        // Navegación suave
+        // Preloader
+        document.addEventListener('DOMContentLoaded', () => {
+            // Preloader
+            setTimeout(() => {
+                const preloader = document.getElementById('preloader');
+                if (preloader) preloader.classList.add('hidden');
+            }, 1500);
+
+            // WhatsApp Modal
+            const whatsappBtn = document.getElementById('whatsapp-btn');
+            const whatsappModal = document.getElementById('whatsapp-modal');
+            const closeModal = document.querySelector('.close');
+            
+            if (whatsappBtn && whatsappModal) {
+                whatsappBtn.addEventListener('click', () => {
+                    whatsappModal.style.display = 'block';
+                    whatsappModal.setAttribute('aria-hidden', 'false');
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+            
+            if (closeModal && whatsappModal) {
+                closeModal.addEventListener('click', () => {
+                    whatsappModal.style.display = 'none';
+                    whatsappModal.setAttribute('aria-hidden', 'true');
+                    document.body.style.overflow = 'auto';
+                });
+            }
+            
+            // Cerrar modal al hacer clic fuera
+            window.addEventListener('click', (e) => {
+                if (e.target === whatsappModal) {
+                    whatsappModal.style.display = 'none';
+                    whatsappModal.setAttribute('aria-hidden', 'true');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            // Mobile Menu Toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (hamburger && navMenu) {
+                hamburger.addEventListener('click', () => {
+                    navMenu.classList.toggle('active');
+                    hamburger.classList.toggle('active');
+                    hamburger.setAttribute('aria-expanded', 
+                        hamburger.getAttribute('aria-expanded') === 'false' ? 'true' : 'false');
+                });
+            }
+            
+            // Cerrar menú al hacer clic en un enlace
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navMenu) navMenu.classList.remove('active');
+                    if (hamburger) {
+                        hamburger.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            });
+        });
+
+        // Navegación suave con dots
         document.querySelectorAll('.nav-dot').forEach(dot => {
             dot.addEventListener('click', () => {
                 const section = dot.getAttribute('data-section');
                 const element = document.getElementById(section);
-                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
             });
         });
 
@@ -741,37 +1255,12 @@
             });
         }, observerOptions);
 
-        // Aplicar observador a las tarjetas
+        // Aplicar observador a las tarjetas de servicios
         document.querySelectorAll('.service-card').forEach(card => {
             observer.observe(card);
         });
 
-        // Mobile Menu Toggle
-        const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.nav-menu');
-        
-        if (hamburger && navMenu) {
-            hamburger.addEventListener('click', () => {
-                navMenu.classList.toggle('active');
-                hamburger.classList.toggle('active');
-                hamburger.setAttribute('aria-expanded', 
-                    hamburger.getAttribute('aria-expanded') === 'false' ? 'true' : 'false');
-            });
-        }
-        
-        // Cerrar menú al hacer clic en un enlace
-        const navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                if (navMenu) navMenu.classList.remove('active');
-                if (hamburger) {
-                    hamburger.classList.remove('active');
-                    hamburger.setAttribute('aria-expanded', 'false');
-                }
-            });
-        });
-
-        // Inicializar la sección activa al cargar
+        // Inicializar la sección activa al cargar la página
         window.addEventListener('load', updateActiveSection);
     </script>
 </body>
