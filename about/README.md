@@ -1,2 +1,0 @@
-# jairsalinas
- portafolio virtual
